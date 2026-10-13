@@ -40,8 +40,6 @@ Make sure that:
 - Unity is configured with the correct IP address and port of the ROS-TCP-Endpoint.
 - The required TCP port is reachable from the machine running the simulator.
 
-See the installation guide in [`docs/installation.md`](docs/installation.md) for detailed instructions.
-
 ### 3. Start developing
 
 Create your own ROS 2 package and implement nodes that interact with the virtual robot.
@@ -107,15 +105,12 @@ ros2 topic pub --once /mino/control/u geometry_msgs/msg/Twist \
 
 Follow the video series to learn how the simulator works and how to build a ROS 2 robotics architecture.
 
-1. **Introduction and project overview** — [Video link]
-2. **Installing Unity and setting up the project** — [Video link]
-3. **Installing and configuring ROS 2** — [Video link]
-4. **Connecting Unity to ROS 2 with the ROS-TCP-Connector** — [Video link]
-5. **Publishing and subscribing to ROS 2 topics** — [Video link]
-6. **Controlling the robot and reading its sensors** — [Video link]
-7. **Developing autonomous navigation algorithms** — [Video link]
-
-See [`docs/tutorials.md`](docs/tutorials.md) for the complete list.
+0. **Introduction and project overview** — ▶️ [Watch video](https://youtu.be/6t4ymVSfwPo)
+2. **Installing Unity, ROS2 and ROS-TCP-Connector** — ⏳ Coming soon
+4. **Subscribing to Laser messages** — ⏳ Coming soon
+5. **Publishing Twist Commands** — ⏳ Coming soon
+6. **Creating a Server to get Camera Images** — ⏳ Coming soon
+7. **Developing autonomous navigation algorithms** — ⏳ Coming soon
 
 ## Source code
 
@@ -125,25 +120,13 @@ The ROS 2 workspace contains example nodes and packages in [`ros2_ws/`](ros2_ws/
 
 To modify the simulator, open the Unity project using a compatible Unity Editor version. To develop your own autonomy stack, create a ROS 2 package in your workspace and connect it to the running simulator.
 
-## Contributing
-
-Contributions, bug reports, and new educational examples are welcome.
-
-You can contribute by:
-
-- Adding ROS 2 examples.
-- Developing navigation and perception algorithms.
-- Improving the simulation and its sensors.
-- Writing tutorials and documentation.
-- Reporting bugs or suggesting new features.
-
-Please open an issue before starting major changes.
-
 ## License
 
-See [`LICENSE`](LICENSE) for the terms of use.
+This project is licensed under the MIT License.
 
-The simulator, Unity assets, and third-party dependencies may have different licensing terms. Check the relevant licenses before redistributing modified builds or assets.
+You are free to use, copy, modify, merge, publish, distribute, sublicense, and sell copies of the software, subject to the terms of the license.
+
+The MIT License requires the original copyright notice and license text to be included with copies or substantial portions of the software.
 
 ## Acknowledgements
 
