@@ -1,4 +1,9 @@
-# ROS 2 Unity Maze Robot
+# Mino — Unity ROS 2 Maze Robot
+
+A Unity-based virtual robot simulator for learning ROS 2,
+featuring LiDAR sensors, multiple camera views and real-time control.
+
+![External view of the Mino simulation](img/externalView.png)
 
 **Learn ROS 2 by programming a virtual mobile robot in a maze.**
 
