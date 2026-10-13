@@ -1,2 +1,152 @@
-# mino-unity-ros2
-A Unity-based virtual robot maze for learning ROS 2, with 1D LiDAR sensors, multiple cameras, and real-time control via ROS-TCP-Connector.
+# ROS 2 Unity Maze Robot
+
+**Learn ROS 2 by programming a virtual mobile robot in a maze.**
+
+ROS 2 Unity Maze Robot is an educational robotics simulator built with Unity and the ROS-TCP-Connector. It provides a virtual mobile robot equipped with multiple sensors, a maze environment, and a ROS 2 interface for developing and testing autonomous robotics software.
+
+The goal is to let anyone experiment with ROS 2, from basic topic communication to high-level robot autonomy, without requiring access to physical hardware.
+
+The project is accompanied by video tutorials covering the development of the simulation and the setup of the ROS 2 communication interface.
+
+## Features
+
+- **Virtual maze environment:** experiment with robot navigation in a simulated world.
+- **Four 1D LiDAR sensors:** front, rear, left, and right distance measurements.
+- **Multiple cameras:** access the robot's camera views for perception and visualization experiments.
+- **ROS 2 integration:** exchange messages with the simulator through the Unity ROS-TCP-Connector.
+- **Velocity control:** control the robot by publishing ROS 2 messages.
+- **Standalone application:** run the simulator without opening the Unity Editor.
+- **Open development environment:** build your own ROS 2 nodes, algorithms, and high-level software architecture.
+
+## Getting started
+
+### 1. Download the simulator
+
+Download the latest standalone build from the [GitHub Releases](../../releases) page.
+
+Extract the archive and launch the application for your operating system.
+
+You do not need to install Unity to run a standalone build.
+
+### 2. Set up ROS 2
+
+Install a supported ROS 2 distribution and configure the ROS-TCP-Endpoint on your ROS 2 machine.
+
+The Unity simulator uses the ROS-TCP-Connector to communicate with ROS 2 over a TCP connection.
+
+Make sure that:
+
+- The ROS-TCP-Endpoint is running.
+- Unity is configured with the correct IP address and port of the ROS-TCP-Endpoint.
+- The required TCP port is reachable from the machine running the simulator.
+
+See the installation guide in [`docs/installation.md`](docs/installation.md) for detailed instructions.
+
+### 3. Start developing
+
+Create your own ROS 2 package and implement nodes that interact with the virtual robot.
+
+For example, you can:
+
+- Subscribe to the LiDAR measurements.
+- Publish velocity commands.
+- Implement keyboard teleoperation.
+- Develop a wall-following algorithm.
+- Build a maze-solving or autonomous navigation system.
+- Design a complete high-level robotics architecture.
+
+The simulator provides the virtual hardware interface. Your ROS 2 nodes implement the robot's intelligence.
+
+## ROS 2 interface
+
+The robot is identified by the namespace `/mino`.
+
+### Topics
+
+| Topic | Message type | Direction | Description |
+|---|---|---|---|
+| `/mino/lidar/scan` | `std_msgs/msg/Float32MultiArray` | Simulator → ROS 2 | LiDAR measurements |
+| `/mino/control/u` | `geometry_msgs/msg/Twist` | ROS 2 → Simulator | Robot velocity commands |
+
+The LiDAR topic provides measurements from the four 1D sensors. Consult [`docs/ros2_interface.md`](docs/ros2_interface.md) for the exact ordering of the sensors, array layout, units, and measurement conventions.
+
+The control topic accepts velocity commands through a `Twist` message. Check the interface documentation for the supported linear and angular components.
+
+### Inspect the topics
+
+Once the simulator and ROS-TCP-Endpoint are running, use the ROS 2 command-line tools to inspect the available topics:
+
+```bash
+ros2 topic list
+ros2 topic info /mino/lidar/scan
+ros2 topic echo /mino/lidar/scan
+ros2 topic info /mino/control/u
+```
+
+Check that the message types and topic names match the interface described above.
+
+### Publish a velocity command
+
+For a basic communication test, publish a `Twist` message:
+
+```bash
+ros2 topic pub --once /mino/control/u geometry_msgs/msg/Twist \
+"{linear: {x: 0.1}, angular: {z: 0.0}}"
+```
+
+This sends a forward velocity command. Ensure the simulation is running and the robot's control interface is active.
+
+To stop the robot, publish a zero-velocity command:
+
+```bash
+ros2 topic pub --once /mino/control/u geometry_msgs/msg/Twist \
+"{linear: {x: 0.0}, angular: {z: 0.0}}"
+```
+
+## Video tutorials
+
+Follow the video series to learn how the simulator works and how to build a ROS 2 robotics architecture.
+
+1. **Introduction and project overview** — [Video link]
+2. **Installing Unity and setting up the project** — [Video link]
+3. **Installing and configuring ROS 2** — [Video link]
+4. **Connecting Unity to ROS 2 with the ROS-TCP-Connector** — [Video link]
+5. **Publishing and subscribing to ROS 2 topics** — [Video link]
+6. **Controlling the robot and reading its sensors** — [Video link]
+7. **Developing autonomous navigation algorithms** — [Video link]
+
+See [`docs/tutorials.md`](docs/tutorials.md) for the complete list.
+
+## Source code
+
+The Unity project is located in [`unity/`](unity/).
+
+The ROS 2 workspace contains example nodes and packages in [`ros2_ws/`](ros2_ws/).
+
+To modify the simulator, open the Unity project using a compatible Unity Editor version. To develop your own autonomy stack, create a ROS 2 package in your workspace and connect it to the running simulator.
+
+## Contributing
+
+Contributions, bug reports, and new educational examples are welcome.
+
+You can contribute by:
+
+- Adding ROS 2 examples.
+- Developing navigation and perception algorithms.
+- Improving the simulation and its sensors.
+- Writing tutorials and documentation.
+- Reporting bugs or suggesting new features.
+
+Please open an issue before starting major changes.
+
+## License
+
+See [`LICENSE`](LICENSE) for the terms of use.
+
+The simulator, Unity assets, and third-party dependencies may have different licensing terms. Check the relevant licenses before redistributing modified builds or assets.
+
+## Acknowledgements
+
+Built with [Unity](https://unity.com/) and the [Unity Robotics ROS-TCP-Connector](https://github.com/Unity-Technologies/ROS-TCP-Connector).
+
+The project is intended for education, experimentation, and rapid prototyping of ROS 2 robotics software.
